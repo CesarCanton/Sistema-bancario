@@ -2,7 +2,7 @@
 (Descripcion de estructura sugerida cumpliendo los principios SOLID)</h1>
 
 
-<strong>#Carpeta Models</strong>
+<strong>Carpeta Models</strong>
 <p>Solo las clases.
 <br><strong>Nota: </strong>Aqui no debe de haber logica de lectura de archivos</p>
 
