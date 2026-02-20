@@ -1,4 +1,3 @@
-
 class Cuenta:
      def __init__(self, id, propietarioId, tipo, saldo, estado):
          self.id=id
