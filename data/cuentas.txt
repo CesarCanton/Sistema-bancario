@@ -1,0 +1,7 @@
+cuentaId,usuarioId,tipoCuenta,saldo,estado
+1001,2,ahorro,850.50,activa
+1002,2,corriente,1200.00,activa
+1003,3,ahorro,430.75,activa
+1004,4,corriente,2500.00,activa
+1005,5,ahorro,150.00,bloqueada
+1006,6,ahorro,980.00,activa
