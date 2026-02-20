@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> 24368dc94d82f8d31dda8359dfc4b3d489cc27ad
 class Cuenta:
      def __init__(self, id, propietarioId, tipo, saldo, estado):
          self.id=id
