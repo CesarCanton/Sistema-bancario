@@ -1,7 +1,0 @@
-usuarioId,role,nombres,apellidos,dui,pin,username
-1,admin,Carlos,Mendez,00000000-0,1234,cm1
-2,cliente,Ana,Lopez,01234567-8,4321,
-3,cliente,Jose,Ramirez,02345678-9,5678,
-4,cliente,Laura,Hernandez,03456789-0,8765,
-5,cliente,Daniel,Martinez,04567890-1,2468,
-6,cliente,Sofia,Castro,05678901-2,1357,
