@@ -7,3 +7,7 @@ class UsuarioRepository(BaseRepository):
             "data/usuarios.txt",
             ["id","rol", "nombres", "apellidos", "dui", "pin","username"]
         )
+        self.cargar_datos()
+        
+    def cargar_datos(self):
+        return super().cargar_datos()
