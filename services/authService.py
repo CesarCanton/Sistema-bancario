@@ -3,14 +3,14 @@ import os
 from repositories.usuarioRepository import UsuarioRepository
 
 def validarUsuario(credenciales, contra):
-    usuario_repo=UsuarioRepository()
+    usuarioRepo=UsuarioRepository()
     
     if len(credenciales)>4 and len(credenciales)<=10:
         # dui=int(credenciales)
         dui=credenciales
         pin=contra
         #Validar que el usuario exista en el repositorio
-        for usuario in usuario_repo.datos:
+        for usuario in usuarioRepo.datos:
             if usuario["dui"]==dui and usuario["pin"]==pin:
                 return usuario["rol"]
             
@@ -18,7 +18,7 @@ def validarUsuario(credenciales, contra):
         username=credenciales
         pin=contra
         #Validar que el usuario exista en el repositorio
-        for usuario in usuario_repo.datos:
+        for usuario in usuarioRepo.datos:
             if usuario["username"]==username and usuario["pin"]==pin:
                 return usuario["rol"]
     
