@@ -100,7 +100,7 @@ def generate_data():
             dui=f"{np.random.randint(10000000,99999999)}-{np.random.randint(0,9)}",
             pin=str(np.random.randint(1000,9999)),
             rol="CLIENTE",
-            username=""
+            username=" "
         )
         usuarios.append(u)
 
