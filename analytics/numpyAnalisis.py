@@ -147,5 +147,34 @@ def estadisticas_admin(X_depositos, X_gastos, cuentas, fechas):
         "top_10_depositos": top_10_depositos,
         "top_10_gastos": top_10_gastos
     }
+
+def totales_diarios_por_cuenta(account_id, X_depositos, X_gastos, cuentas, fechas):
+
+    # Verificar que la cuenta existe
+    if account_id not in cuentas:
+        raise ValueError("La cuenta no existe en la matriz")
+
+    # Obtener índice de la cuenta
+    indice = cuentas.index(account_id)
+
+    # Extraer la fila correspondiente
+    depositos_diarios = X_depositos[indice, :]
+    gastos_diarios = X_gastos[indice, :]
+
+    # Calcular neto diario
+    neto_diario = depositos_diarios - gastos_diarios
+
+    # Construir resultado estructurado
+    resultado = [
+        {
+            "fecha": fechas[i],
+            "depositos": depositos_diarios[i],
+            "gastos": gastos_diarios[i],
+            "neto": neto_diario[i]
+        }
+        for i in range(len(fechas))
+    ]
+
+    return resultado
     
     

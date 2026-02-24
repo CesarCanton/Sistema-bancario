@@ -116,12 +116,10 @@ def cambiarEstadoCuenta():
     print("=== CAMBIAR ESTADO DE CUENTA ===\n")
 
     try:
-        # mostrar cuentas primero
         listaDeCuentas()
 
         idCuenta = input("\nIngrese el ID de la cuenta: ").strip()
 
-        # 🔥 selector seguro de estado (el que quieres usar)
         print("\n1. ACTIVA")
         print("2. BLOQUEADA")
 
@@ -130,16 +128,16 @@ def cambiarEstadoCuenta():
         estado = "ACTIVA" if opc == "1" else "BLOQUEADA" if opc == "2" else None
 
         if not estado:
-            print("❌ Opción inválida")
+            print("Opción inválida")
             input("Enter para continuar...")
             return
 
         cambiar_estado_cuenta(idCuenta, estado)
 
-        print("✅ Estado actualizado correctamente")
+        print("Estado actualizado correctamente")
 
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f"Error: {e}")
 
     
     input("\nPresione Enter para continuar...")

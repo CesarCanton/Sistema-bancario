@@ -3,7 +3,7 @@ from repositories.cuentaRepository import CuentaRepository
 from repositories.transaccionRepository import TransaccionRepository
 import numpy as np
 from models.usuario import Usuario
-from analytics.numpyAnalisis import constructor_matrices, estadisticas_por_cuenta, estadisticas_admin
+from analytics.numpyAnalisis import constructor_matrices, estadisticas_admin
 
 usuario_repo = UsuarioRepository()
 
@@ -136,6 +136,5 @@ def ejecutar_analitica():
     for i, dia in enumerate(stats_admin['top_5_dias'],start=1):
         print(f"\033[1;36;40m{i}. Fecha: {dia['fecha']} \033[0m Deposito: {dia['total_depositos']:.2f} " 
               f"Gastos: ${dia['total_gastos']:.2f} Neto: ${dia['neto']:.2f}")
-    # return stats_cuentas, stats_admin
     
 

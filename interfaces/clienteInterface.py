@@ -1,4 +1,6 @@
+import os
 from services.cuentaService import CuentaService
+
 
 
 class InterfazCliente:
@@ -11,12 +13,16 @@ class InterfazCliente:
     def menu(self, cliente):
 
         while True:
+            os.system('cls')
+            
             print("\n====== CLIENTE ======")
             print("1. Ver cuentas")
             print("2. Depositar")
             print("3. Retirar")
             print("4. Transferir")
-            print("5. Salir")
+            print("5. Historial de cuenta")
+            print("6. Estadisticas generales")
+            print("7. Salir")
 
             op = input("Seleccione: ")
 
@@ -33,6 +39,10 @@ class InterfazCliente:
                 self.transferir(cliente)
 
             elif op == "5":
+                self.analitica_diaria_cuenta(cliente)
+                break
+            elif op == "6":
+                self.analitica_general_cuenta(cliente)
                 break
             else:
                 print("Opción inválida")
@@ -116,11 +126,11 @@ class InterfazCliente:
             print("No tienes cuentas registradas")
             return None
 
-        # 👉 solo una cuenta
+        # Solo una cuenta
         if len(cuentas) == 1:
             return cuentas[0]
 
-        # 👉 varias cuentas → mostrar menú
+        #arias cuentas → mostrar menú
         print("\nSeleccione cuenta origen:")
 
         for i, c in enumerate(cuentas, start=1):
@@ -134,7 +144,20 @@ class InterfazCliente:
             pass
 
         print("Selección inválida")
-        return None                     
+        return None
+    
+    #SECCION DE ANALISIS
+    def analitica_diaria_cuenta(self,cliente):
+        self.cuenta_service.analisis_por_dia(cliente["id"])
+        input("\n\nPresione Enter para salir de la pantalla....")
+        
+        self.menu(cliente)
+    
+    def analitica_general_cuenta(self,cliente):
+        self.cuenta_service.analisis_general(cliente["id"]) 
+        input("\n\nPresione Enter para salir de la pantalla....")
+        self.menu(cliente)
+        
 
 # =========================
 # WRAPPER PARA LOGIN
