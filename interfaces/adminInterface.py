@@ -1,6 +1,6 @@
 import sys
 import os
-from services.adminService import crear_cliente, listar_usuarios, crear_admin, listaDeCuentas
+from services.adminService import crear_cliente, listar_usuarios, crear_admin, listaDeCuentas, cambiar_estado_cuenta
 
 titulo = "\n\033[1;36;40m === SISTEMA BANCARIO(ADMIN) === \033[0m\n"
 def crearCliente():
@@ -48,7 +48,18 @@ def crearCliente():
                 
         
 def listarUsuarios():
-    pass
+    os.system('cls')
+    print(titulo)
+    print("=== LISTADO DE CLIENTES ===\n")
+
+    try:
+        usuarios = listar_usuarios()
+
+    except Exception as e:
+        print(e)
+
+    input("\nPresione Enter para continuar...")
+    
 def crearAdmin():
     while True:
         os.system('cls')
@@ -95,6 +106,41 @@ def listarCuentas():
     input("Presione enter para volver al menu principal")
     mostrarInterfazAdmin()
 
+def cambiarEstadoCuenta():
+    os.system('cls')
+    print(titulo)
+    print("=== CAMBIAR ESTADO DE CUENTA ===\n")
+
+    try:
+        # mostrar cuentas primero
+        listaDeCuentas()
+
+        idCuenta = input("\nIngrese el ID de la cuenta: ").strip()
+
+        # 🔥 selector seguro de estado (el que quieres usar)
+        print("\n1. ACTIVA")
+        print("2. BLOQUEADA")
+
+        opc = input("Seleccione estado: ").strip()
+
+        estado = "ACTIVA" if opc == "1" else "BLOQUEADA" if opc == "2" else None
+
+        if not estado:
+            print("❌ Opción inválida")
+            input("Enter para continuar...")
+            return
+
+        cambiar_estado_cuenta(idCuenta, estado)
+
+        print("✅ Estado actualizado correctamente")
+
+    except Exception as e:
+        print(f"❌ Error: {e}")
+
+    
+    input("\nPresione Enter para continuar...")
+    os.system('cls')
+
 def mostrarInterfazAdmin():
     os.system('cls')
     
@@ -102,14 +148,14 @@ def mostrarInterfazAdmin():
         print(titulo)
         print("Bienvenido al sistema bancario")
     
-        opcion=int(input("Seleccione una opcion: \n1.Crear cliente\n2.Listar usuarios\n3.Crear admin\n4.Listar cuentas\n9.Salir\n"))
+        opcion=int(input("Seleccione una opcion: \n1.Crear cliente\n2.Listar usuarios\n3.Crear admin\n4.Listar cuentas\n5.Cambiar estado de cuenta\n9.Salir\n"))
 
         match opcion:
             case 1: 
                 crearCliente()
                 break                
             case 2: 
-                
+                listarUsuarios()
                 pass
             case 3: 
                 crearAdmin()
@@ -118,6 +164,7 @@ def mostrarInterfazAdmin():
                 listarCuentas()
                 break
             case 5: 
+                cambiarEstadoCuenta()
                 pass
             case 6: 
                 pass
@@ -127,5 +174,3 @@ def mostrarInterfazAdmin():
             case _:
                 print("\033[31mOpcion no valida. Intente nuevamente.\033[0m")
                 input("Presione Enter para continuar...")
-    
-    
