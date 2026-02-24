@@ -5,32 +5,76 @@ import numpy as np
 from models.usuario import Usuario
 from analytics.numpyAnalisis import constructor_matrices, estadisticas_por_cuenta, estadisticas_admin
 
+usuario_repo = UsuarioRepository()
+
+def get_next_id():
+    if not usuario_repo.datos:
+        return 1
+    return max(int(u["id"]) for u in usuario_repo.datos) + 1
+
 def generar_username_admin(nombres, apellidos, id):
     siglas = nombres[0].lower() + apellidos[0].lower()
     username = siglas + str(id)
     return username 
 
-def crear_cliente(nombres, apellidos, dui, pin, rol):
-    repo=UsuarioRepository()
-    id=len(repo.datos)+1
-    username=" "#Ya que es cliente, no se genera un Username, solo los administradores pueden tener ese privilegio
-    usuarioNuevo= Usuario(id,nombres,apellidos,dui,pin,rol,username)
-    repo.agregar(usuarioNuevo)
-    
-
 def crear_admin(nombres, apellidos, dui, pin, rol):
+
     repo=UsuarioRepository()
+    if len(pin) != 4 or not pin.isdigit():
+        raise Exception("PIN inválido")
+    
     id=len(repo.datos)+1
+
     
     username=generar_username_admin(nombres, apellidos, id)   
     nuevoAdmin= Usuario(id,nombres,apellidos,dui,pin,rol,username)
     repo.agregar(nuevoAdmin) 
+
+def crear_cliente(nombres, apellidos, dui, pin, rol="CLIENTE"):
+
+    # Validación DUI duplicado
+    if any(u["dui"] == dui for u in usuario_repo.datos):
+        raise Exception("El DUI ya existe")
+
+    if len(pin) != 4 or not pin.isdigit():
+        raise Exception("PIN inválido")
+
+    id_user = get_next_id()
+    username = " "
+
+    usuario = Usuario(
+        id_user,
+        nombres,
+        apellidos,
+        dui,
+        pin,
+        rol,
+        username
+    )
+
+    usuario_repo.agregar(usuario.to_dict())
+
+    return username
     
 def listar_usuarios(usuarios):
     for usuario in usuarios:
         print(f"ID: {usuario.id}, Nombres: {usuario.nombres},"
               f"Apellidos: {usuario.apellidos}, DUI: {usuario.dui}, Rol: {usuario.rol}, Username: {usuario.username}")
-        
+
+def listar_usuarios():
+
+    if not usuario_repo.datos:
+        print("No hay usuarios")
+        return
+
+    for u in usuario_repo.datos:
+        print(
+            f"ID: {u['id']} | "
+            f"{u['nombres']} {u['apellidos']} | "
+            f"DUI: {u['dui']} | "
+            f"Rol: {u['rol']} | "
+            f"Username: {u['username']}"
+        )
 
 def listaDeCuentas():
     cuentasRepo=CuentaRepository()
@@ -40,7 +84,20 @@ def listaDeCuentas():
               f"Id del propietario: {cuenta["propietarioId"]}. "
               f"Estado de cuenta: {cuenta["estado"]}. "
               f"Saldo: {cuenta["saldo"]}\n")
+        
+def cambiar_estado_cuenta(cuenta_id, nuevo_estado):
 
+    cuentas_repo = CuentaRepository()
+
+    cuenta = next((c for c in cuentas_repo.datos if c["id"] == str(cuenta_id)), None)
+
+    if not cuenta:
+        raise Exception("Cuenta no encontrada")
+
+    cuenta["estado"] = nuevo_estado
+    cuentas_repo.guardar_datos()
+
+    print(f"Cuenta {cuenta_id} ahora está {nuevo_estado}")
 
 def ejecutar_analitica():
 

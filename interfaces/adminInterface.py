@@ -1,5 +1,5 @@
 import os
-from services.adminService import crear_cliente, listar_usuarios, crear_admin, listaDeCuentas, ejecutar_analitica
+from services.adminService import crear_cliente, listar_usuarios, crear_admin, listaDeCuentas, cambiar_estado_cuenta, ejecutar_analitica
 
 titulo = "\n\033[1;36;40m === SISTEMA BANCARIO(ADMIN) === \033[0m\n"
 def crearCliente():
@@ -47,7 +47,18 @@ def crearCliente():
                 
         
 def listarUsuarios():
-    pass
+    os.system('cls')
+    print(titulo)
+    print("=== LISTADO DE CLIENTES ===\n")
+
+    try:
+        usuarios = listar_usuarios()
+
+    except Exception as e:
+        print(e)
+
+    input("\nPresione Enter para continuar...")
+    
 def crearAdmin():
     while True:
         os.system('cls')
@@ -93,11 +104,46 @@ def listarCuentas():
     listaDeCuentas()
     input("Presione enter para volver al menu principal")
     mostrarInterfazAdmin()
-
+    
 def analitica():
     ejecutar_analitica()
     input("Presione enter para volver al menu principal")
     mostrarInterfazAdmin()
+
+def cambiarEstadoCuenta():
+    os.system('cls')
+    print(titulo)
+    print("=== CAMBIAR ESTADO DE CUENTA ===\n")
+
+    try:
+        # mostrar cuentas primero
+        listaDeCuentas()
+
+        idCuenta = input("\nIngrese el ID de la cuenta: ").strip()
+
+        # 🔥 selector seguro de estado (el que quieres usar)
+        print("\n1. ACTIVA")
+        print("2. BLOQUEADA")
+
+        opc = input("Seleccione estado: ").strip()
+
+        estado = "ACTIVA" if opc == "1" else "BLOQUEADA" if opc == "2" else None
+
+        if not estado:
+            print("❌ Opción inválida")
+            input("Enter para continuar...")
+            return
+
+        cambiar_estado_cuenta(idCuenta, estado)
+
+        print("✅ Estado actualizado correctamente")
+
+    except Exception as e:
+        print(f"❌ Error: {e}")
+
+    
+    input("\nPresione Enter para continuar...")
+    os.system('cls')
 
 def mostrarInterfazAdmin():
     os.system('cls')
@@ -111,6 +157,7 @@ def mostrarInterfazAdmin():
                         f"\n3.Crear admin"
                         f"\n4.Listar cuentas"
                         f"\n5.Analitica de cuentas"
+                        f"\n6.Cambiar estado de cuenta"
                         f"\n9.Salir\n"))
 
         match opcion:
@@ -118,7 +165,7 @@ def mostrarInterfazAdmin():
                 crearCliente()
                 break                
             case 2: 
-                
+                listarUsuarios()
                 pass
             case 3: 
                 crearAdmin()
@@ -128,8 +175,11 @@ def mostrarInterfazAdmin():
                 break
             case 5:
                 analitica()
-                pass
+                break
             case 6: 
+                cambiarEstadoCuenta()
+                pass
+            case 7: 
                 pass
             case 9:
                 print("\033[32mSaliendo del sistema...\033[0m")
@@ -137,5 +187,3 @@ def mostrarInterfazAdmin():
             case _:
                 print("\033[31mOpcion no valida. Intente nuevamente.\033[0m")
                 input("Presione Enter para continuar...")
-    
-    

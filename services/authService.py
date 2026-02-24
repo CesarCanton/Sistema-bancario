@@ -21,11 +21,3 @@ def validarUsuario(credenciales, contra):
         for usuario in usuarioRepo.datos:
             if usuario["username"]==username and usuario["pin"]==pin:
                 return usuario["rol"]
-    
-    
-    
-    
-        
-        
-        
-        

@@ -23,4 +23,14 @@ class UsuarioRepository(BaseRepository):
         else:
             usuarioDict=usuario
         return super().agregar(usuarioDict)
+
+    def buscar_por_credenciales(self, credencial, pin):
+
+        for usuario in self.datos:
+            if usuario["pin"] == pin and (
+                usuario["dui"] == credencial or usuario["username"] == credencial
+            ):
+                return usuario
+
+        return None
     
