@@ -1,6 +1,5 @@
-import sys
 import os
-from services.adminService import crear_cliente, listar_usuarios, crear_admin, listaDeCuentas
+from services.adminService import crear_cliente, listar_usuarios, crear_admin, listaDeCuentas, ejecutar_analitica
 
 titulo = "\n\033[1;36;40m === SISTEMA BANCARIO(ADMIN) === \033[0m\n"
 def crearCliente():
@@ -95,6 +94,11 @@ def listarCuentas():
     input("Presione enter para volver al menu principal")
     mostrarInterfazAdmin()
 
+def analitica():
+    ejecutar_analitica()
+    input("Presione enter para volver al menu principal")
+    mostrarInterfazAdmin()
+
 def mostrarInterfazAdmin():
     os.system('cls')
     
@@ -102,7 +106,12 @@ def mostrarInterfazAdmin():
         print(titulo)
         print("Bienvenido al sistema bancario")
     
-        opcion=int(input("Seleccione una opcion: \n1.Crear cliente\n2.Listar usuarios\n3.Crear admin\n4.Listar cuentas\n9.Salir\n"))
+        opcion=int(input("Seleccione una opcion: \n1.Crear cliente"
+                        f"\n2.Listar usuarios"
+                        f"\n3.Crear admin"
+                        f"\n4.Listar cuentas"
+                        f"\n5.Analitica de cuentas"
+                        f"\n9.Salir\n"))
 
         match opcion:
             case 1: 
@@ -117,7 +126,8 @@ def mostrarInterfazAdmin():
             case 4: 
                 listarCuentas()
                 break
-            case 5: 
+            case 5:
+                analitica()
                 pass
             case 6: 
                 pass
