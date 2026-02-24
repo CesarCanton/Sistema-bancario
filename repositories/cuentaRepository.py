@@ -7,3 +7,8 @@ class CuentaRepository(BaseRepository):
             "data/cuentas.txt",
             ["id", "propietarioId", "tipo", "saldo", "estado"]
         )
+        self.cargar_datos()
+        
+        
+    def cargar_datos(self):
+        return super().cargar_datos()

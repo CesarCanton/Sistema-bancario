@@ -1,6 +1,6 @@
 import sys
 import os
-from services.adminService import crear_cliente, listar_usuarios, crear_admin
+from services.adminService import crear_cliente, listar_usuarios, crear_admin, listaDeCuentas
 
 titulo = "\n\033[1;36;40m === SISTEMA BANCARIO(ADMIN) === \033[0m\n"
 def crearCliente():
@@ -90,7 +90,10 @@ def crearAdmin():
             input("Presione Enter para continuar...")
     
 def listarCuentas():
-    pass
+    print("Listado de cuentas")
+    listaDeCuentas()
+    input("Presione enter para volver al menu principal")
+    mostrarInterfazAdmin()
 
 def mostrarInterfazAdmin():
     os.system('cls')
@@ -112,7 +115,8 @@ def mostrarInterfazAdmin():
                 crearAdmin()
                 pass
             case 4: 
-                pass
+                listarCuentas()
+                break
             case 5: 
                 pass
             case 6: 
