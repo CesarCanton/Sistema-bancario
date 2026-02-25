@@ -20,7 +20,7 @@ class InterfazCliente:
             print("2. Depositar")
             print("3. Retirar")
             print("4. Transferir")
-            print("5. Historial de cuenta")
+            print("5. Historial de depositos")
             print("6. Estadisticas generales")
             print("7. Salir")
 

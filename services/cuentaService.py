@@ -212,7 +212,7 @@ class CuentaService:
         X_dep, X_gas, cuentas, fechas = constructor_matrices(transacciones.datos)
         resultado= totales_diarios_por_cuenta(cuentaId,X_dep,X_gas,cuentas,fechas)
 
-        print("\033[1;36;40m=== Estadísticas De Las cuentas ===\033[0m")
+        print("\033[1;36;40m=== Historial de depositos ===\033[0m")
         
         for dia in resultado:
                     print(
@@ -233,8 +233,8 @@ class CuentaService:
             if cuenta==cuentaId:
                 print("\033[1;36;40m=== Estadísticas de la cuenta ===\033[0m")
                 
-                print(f"\033[1;36;40mCuenta {cuenta}:\033[0m"
-                f"\nTotal Depósitos: {stats_cuentas['total_depositos'][i]:.2f}, "
+                # print(f"\033[1;36;40mCuenta {cuenta}:\033[0m"
+                print(f"\nTotal Depósitos: {stats_cuentas['total_depositos'][i]:.2f}, "
                 f"\nPromedio Diario: {stats_cuentas['promedio_diario'][i]:.2f}, "
                 f"\nDesviación Estándar: {stats_cuentas['desviacion'][i]:.2f}")
         
