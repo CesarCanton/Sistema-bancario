@@ -12,8 +12,8 @@ class InterfazCliente:
     # =========================
     def menu(self, cliente):
 
-        while True:
-            os.system('cls')
+        os.system('cls')    
+        while True:   
             
             print("\n====== CLIENTE ======")
             print("1. Ver cuentas")
@@ -43,6 +43,8 @@ class InterfazCliente:
                 break
             elif op == "6":
                 self.analitica_general_cuenta(cliente)
+                break
+            elif op == "7":
                 break
             else:
                 print("Opción inválida")
