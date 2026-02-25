@@ -80,4 +80,3 @@ id|rol|nombres|apellidos|dui|pin|username
 79|CLIENTE|Maria|Lopez|66987271-1|1539| 
 80|CLIENTE|Ricardo|Gomez|31288948-3|3779| 
 81|CLIENTE|Ana|Martinez|39933823-4|2838| 
-83|ADMIN|hola|admin|12345678-9|2121|ha83

@@ -18,18 +18,28 @@ def generar_username_admin(nombres, apellidos, id):
     username = siglas + str(id)
     return username 
 
-def crear_admin(nombres, apellidos, dui, pin, rol):
+def crear_admin(nombres, apellidos, dui, pin, rol="ADMIN"):
 
-    repo=UsuarioRepository()
     if len(pin) != 4 or not pin.isdigit():
         raise Exception("PIN inválido")
-    
-    id=len(repo.datos)+1
 
-    
-    username=generar_username_admin(nombres, apellidos, id)   
-    nuevoAdmin= Usuario(id,nombres,apellidos,dui,pin,rol,username)
-    repo.agregar(nuevoAdmin) 
+    id_user = get_next_id()
+    username = generar_username_admin(nombres, apellidos,id_user)
+
+    admin = Usuario(
+        id_user,
+        nombres,
+        apellidos,
+        dui,
+        pin,
+        rol,
+        username
+    )
+
+    usuario_repo.agregar(admin.to_dict())
+
+    return username
+
 
 def crear_cliente(nombres, apellidos, dui, pin, rol="CLIENTE"):
 
