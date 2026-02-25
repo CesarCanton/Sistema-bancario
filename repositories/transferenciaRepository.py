@@ -7,3 +7,7 @@ class TransferenciaRepository(BaseRepository):
             "data/transferencias.txt",
             ["id", "cuentaOrigen", "cuentaDestino", "monto", "fecha"]
         )
+        self.cargar_datos()
+    
+    def cargar_datos(self):
+        return super().cargar_datos()
